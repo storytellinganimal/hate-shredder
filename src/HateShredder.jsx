@@ -396,7 +396,7 @@ const CSS = `
 .hs-root{
   font-family:'Karrik',ui-sans-serif,system-ui,-apple-system,sans-serif;
   color:#000; background:#fff;
-  min-height:100%; padding:40px 20px 64px;
+  min-height:100%; padding:40px 20px 24px;
   display:flex; flex-direction:column; align-items:center; box-sizing:border-box;
   position:relative;
 }
@@ -537,9 +537,9 @@ const CSS = `
 .hs-sources-list li i{ font-style:italic; }
 
 .hs-footer{
-  width:min(500px,92%); margin-top:18px; padding-bottom:8px;
+  width:min(500px,92%); margin-top:36px; padding-bottom:2px;
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;
-  letter-spacing:.06em; color:#888;
+  letter-spacing:.06em; text-transform:uppercase; line-height:1.65; color:#888;
 }
 .hs-footer-link{ color:#888; text-decoration:none; }
 .hs-footer-link:hover{ text-decoration:underline; text-underline-offset:3px; }
