@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import senecaImg from "./seneca-1.png";
+import senecaFigImg from "./seneca-fig-1.png";
 
 const STRIP_COUNT = 16;
 const REVEAL_MS = 1900;
@@ -275,6 +276,7 @@ export default function HateShredder() {
 
       <header className="hs-head">
         <img src={senecaImg} alt="Seneca" className="hs-seneca" />
+        <img src={senecaFigImg} alt="Seneca figure" className="hs-seneca-fig" />
         <h1 className="hs-title">Rant Shredder</h1>
         <p className="hs-tag">{t.tag}</p>
         <div className="hs-story">
@@ -389,17 +391,19 @@ const CSS = `
   padding:6px 10px; cursor:pointer;
 }
 .hs-lang:first-child{ border-left:none; }
+.hs-lang:hover:not(.hs-lang--on){ background:#FCB8FF; }
 .hs-lang--on{ background:#000; color:#fff; }
 .hs-lang:focus-visible{ outline:2px solid #000; outline-offset:2px; }
 
 .hs-head{ text-align:center; margin-bottom:26px; }
 .hs-seneca{ display:block; margin:0 auto 20px; max-width:200px; width:100%; }
+.hs-seneca-fig{ display:block; margin:0 auto 32px; max-width:260px; width:100%; }
 .hs-title{
   font-family:'Karrik',ui-sans-serif,system-ui,sans-serif;
   font-weight:800; font-size:clamp(40px,9vw,64px); line-height:.95;
-  letter-spacing:-.02em; margin:0;
+  letter-spacing:-.02em; margin:16px 0 0;
 }
-.hs-tag{ font-size:15px; color:#555; margin:10px 0 0; }
+.hs-tag{ font-size:15px; color:#555; margin:10px 0 28px; }
 .hs-story{ max-width:500px; margin:32px auto 0; text-align:left; }
 .hs-story p{ font-family:"Garamond","EB Garamond",Georgia,serif; font-size:15.5px; line-height:1.65; color:#333; margin:0 0 10px; }
 .hs-story p:last-child{ margin-bottom:0; }
@@ -428,6 +432,7 @@ const CSS = `
 .hs-top{
   height:30px; border:1px solid #000; position:relative;
   display:flex; align-items:center; justify-content:center;
+  background:#FFE400;
 }
 .hs-slot{ width:min(340px,68%); height:4px; background:#000; }
 .hs-readout{
@@ -440,7 +445,7 @@ const CSS = `
 .hs-dot[data-state="done"]{ background:#000; }
 @keyframes hs-blink{ 50%{ opacity:.2; } }
 
-.hs-body{ border:1px solid #000; border-top:none; padding:20px; }
+.hs-body{ border:1px solid #000; border-top:none; padding:20px; background:#C2E8FF; }
 
 .hs-modes{ display:flex; gap:10px; }
 .hs-mode{
@@ -450,7 +455,7 @@ const CSS = `
 }
 .hs-mode:hover:not(:disabled){ background:#000; color:#fff; }
 .hs-mode--on{ background:#000; color:#fff; }
-.hs-mode:disabled{ opacity:.35; cursor:not-allowed; }
+.hs-mode:disabled{ cursor:default; }
 .hs-mode:focus-visible{ outline:2px solid #000; outline-offset:2px; }
 .hs-mode-label{ font-weight:700; font-size:15px; }
 .hs-mode-blurb{ font-size:12px; line-height:1.3; opacity:.8; }
