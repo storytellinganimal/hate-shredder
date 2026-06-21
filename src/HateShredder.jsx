@@ -245,6 +245,7 @@ export default function HateShredder() {
   function startOver() {
     setPhase("idle");
     setOutput("");
+    setText("");
     setCopied(false);
   }
 
@@ -300,7 +301,11 @@ export default function HateShredder() {
             <textarea
               className="hs-textarea"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                e.target.style.height = "auto";
+                e.target.style.height = Math.max(116, e.target.scrollHeight) + "px";
+              }}
               placeholder={t.placeholder}
               aria-label="Message to rework"
               spellCheck={false}
@@ -456,9 +461,10 @@ const CSS = `
 }
 .hs-slot{ width:min(340px,68%); height:4px; background:#000; }
 .hs-readout{
-  position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px;
   letter-spacing:.12em; color:#000; display:flex; align-items:center; gap:6px;
+  background:#FFE400; padding:0 14px; height:100%;
 }
 .hs-dot{ width:7px; height:7px; border-radius:50%; border:1px solid #000; background:#fff; }
 .hs-dot[data-state="shredding"]{ background:#000; animation:hs-blink .6s steps(1) infinite; }
