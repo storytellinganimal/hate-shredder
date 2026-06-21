@@ -202,6 +202,7 @@ export default function HateShredder() {
   const [phase, setPhase] = useState("idle"); // idle | shredding | done | error
   const [output, setOutput] = useState("");
   const [modeId, setModeId] = useState("direct");
+  const [copied, setCopied] = useState(false);
 
   const t = T[lang];
 
@@ -244,6 +245,14 @@ export default function HateShredder() {
   function startOver() {
     setPhase("idle");
     setOutput("");
+    setCopied(false);
+  }
+
+  function copyOutput() {
+    navigator.clipboard.writeText(output).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }
 
   const readout =
@@ -347,6 +356,9 @@ export default function HateShredder() {
       {phase === "done" && (
         <div className="hs-out">
           <div className="hs-out-label">{t.modes[modeId].label} · {t.outSuffix}</div>
+          <button className="hs-copy" onClick={copyOutput} aria-label="Copy to clipboard">
+            {copied ? "✓" : "Copy"}
+          </button>
           <div className="hs-out-text">{output}</div>
           <button className="hs-startover" onClick={startOver}>
             {t.startOver}
@@ -368,6 +380,14 @@ export default function HateShredder() {
           ))}
         </ul>
       </footer>
+
+      <div className="hs-footer">
+        Designed by{" "}
+        <a href="https://linamoreno.com" target="_blank" rel="noopener noreferrer" className="hs-footer-link">
+          Lina Moreno
+        </a>
+        , developed with Claude. Illustration: Lina Moreno; Getty Images.
+      </div>
     </div>
   );
 }
@@ -479,11 +499,20 @@ const CSS = `
   100%{ transform:translateY(var(--fall)) translateX(var(--drift)) rotate(var(--rot)); opacity:.08; }
 }
 
-.hs-out{ width:min(500px,92%); margin-top:26px; border:1px solid #000; padding:20px 22px; }
+.hs-out{ width:min(500px,92%); margin-top:26px; border:1px solid #000; padding:20px 22px; position:relative; }
 .hs-out-label{
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;
   letter-spacing:.1em; text-transform:uppercase; color:#000; margin-bottom:10px;
 }
+.hs-copy{
+  position:absolute; top:16px; right:16px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px;
+  letter-spacing:.08em; text-transform:uppercase;
+  background:#fff; color:#000; border:1px solid #000; padding:4px 9px; cursor:pointer;
+  transition:background .12s ease, color .12s ease;
+}
+.hs-copy:hover{ background:#000; color:#fff; }
+.hs-copy:focus-visible{ outline:2px solid #000; outline-offset:2px; }
 .hs-out-text{ font-size:17px; line-height:1.55; color:#000; white-space:pre-wrap; }
 .hs-startover{
   margin-top:16px; background:none; border:none; padding:0; cursor:pointer;
@@ -506,6 +535,14 @@ const CSS = `
 .hs-sources-list{ list-style:none; margin:0; padding:0; }
 .hs-sources-list li{ font-size:13px; line-height:1.5; color:#444; padding:4px 0; }
 .hs-sources-list li i{ font-style:italic; }
+
+.hs-footer{
+  width:min(500px,92%); margin-top:18px; padding-bottom:8px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;
+  letter-spacing:.06em; color:#888;
+}
+.hs-footer-link{ color:#888; text-decoration:none; }
+.hs-footer-link:hover{ text-decoration:underline; text-underline-offset:3px; }
 
 @media (max-width:520px){
   .hs-modes{ flex-direction:column; }
