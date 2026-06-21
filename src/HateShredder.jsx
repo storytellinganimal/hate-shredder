@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import senecaImg from "./seneca-1.png";
 
 const STRIP_COUNT = 16;
 const REVEAL_MS = 1900;
@@ -276,6 +277,7 @@ export default function HateShredder() {
       </div>
 
       <header className="hs-head">
+        <img src={senecaImg} alt="Seneca" className="hs-seneca" />
         <h1 className="hs-title">HATE SHREDDER</h1>
         <p className="hs-tag">{t.tag}</p>
         <div className="hs-story">
@@ -373,7 +375,7 @@ export default function HateShredder() {
 
 const CSS = `
 .hs-root{
-  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family:'Karrik',ui-sans-serif,system-ui,-apple-system,sans-serif;
   color:#000; background:#fff;
   min-height:100%; padding:40px 20px 64px;
   display:flex; flex-direction:column; align-items:center; box-sizing:border-box;
@@ -394,13 +396,15 @@ const CSS = `
 .hs-lang:focus-visible{ outline:2px solid #000; outline-offset:2px; }
 
 .hs-head{ text-align:center; margin-bottom:26px; }
+.hs-seneca{ display:block; margin:0 auto 20px; max-width:200px; width:100%; }
 .hs-title{
+  font-family:'Karrik',ui-sans-serif,system-ui,sans-serif;
   font-weight:800; font-size:clamp(40px,9vw,64px); line-height:.95;
   letter-spacing:-.02em; margin:0; text-transform:uppercase;
 }
 .hs-tag{ font-size:15px; color:#555; margin:10px 0 0; }
 .hs-story{ max-width:500px; margin:18px auto 0; text-align:left; }
-.hs-story p{ font-size:14.5px; line-height:1.6; color:#333; margin:0 0 10px; }
+.hs-story p{ font-family:"Garamond","EB Garamond",Georgia,serif; font-size:15.5px; line-height:1.65; color:#333; margin:0 0 10px; }
 .hs-story p:last-child{ margin-bottom:0; }
 
 .hs-machine-wrap{ width:min(540px,94vw); display:flex; flex-direction:column; align-items:center; }

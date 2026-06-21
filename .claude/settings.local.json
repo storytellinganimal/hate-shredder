@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:velvetyne.fr)",
+      "WebFetch(domain:gitlab.com)",
+      "Bash(curl -L \"https://gitlab.com/phantomfoundry/karrik_fonts/-/archive/main/karrik_fonts-main.zip\" -o /tmp/karrik.zip)",
+      "Bash(unzip -l /tmp/karrik.zip)",
+      "Bash(unzip -j /tmp/karrik.zip \"karrik_fonts-main/fonts/Web/WOFF2/*\" \"karrik_fonts-main/fonts/Web/WOFF/*\" -d /Users/morenol/Documents/VibeCoding/hate-shredder/src/fonts/)"
+    ]
+  }
+}
