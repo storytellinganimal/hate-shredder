@@ -403,7 +403,7 @@ const CSS = `
   font-weight:800; font-size:clamp(40px,9vw,64px); line-height:.95;
   letter-spacing:-.02em; margin:16px 0 0;
 }
-.hs-tag{ font-size:15px; color:#555; margin:10px 0 28px; }
+.hs-tag{ font-size:15px; color:#555; margin:10px 0 36px; }
 .hs-story{ max-width:500px; margin:32px auto 0; text-align:left; }
 .hs-story p{ font-family:"Garamond","EB Garamond",Georgia,serif; font-size:15.5px; line-height:1.65; color:#333; margin:0 0 10px; }
 .hs-story p:last-child{ margin-bottom:0; }
