@@ -63,23 +63,23 @@ const SOURCE_TITLES = [
   "Rhetoric",
   "",
   "On Anger (De Ira)",
-  "",
 ];
 
 const T = {
   en: {
-    tag: "Feed it your worst. Out comes your point.",
+    tag: "Say it. Just say it better.",
     story1:
-      "Your dad keeps voting for that politician. Your colleague answers only the emails that " +
-      "serve him. Your project partner waited until you were on holiday to present the work \u2014 " +
-      "without you. The neighbour has hit his crazy party phase. The rage is completely reasonable.",
+      "Your dad keeps voting for that politician and you don't get it. Your colleague answers only " +
+      "the emails that serve him. Your project partner waited until you were on holiday to present " +
+      "the work \u2014 without you. The neighbour blocks your parking spot. Again. The rage is " +
+      "completely reasonable. The rant is not.",
     story2:
-      "The 2 a.m. reply you're drafting is not. Hate Shredder runs your worst draft through a few " +
-      "thousand years of people working out how to disagree without making it worse \u2014 Aristotle, " +
-      "Seneca, Socrates, and modern minds like Carnegie, Rosenberg, and Haidt \u2014 and hands back " +
-      "something they might actually hear. Not just a bot: a very old argument about how to be heard.",
+      "Rant Shredder runs your worst draft through a few thousand years of people figuring out how " +
+      "to disagree without making it worse \u2014 Aristotle, Seneca, Socrates, and modern minds like " +
+      "Carnegie, Rosenberg, and Haidt \u2014 and hands back something people might actually hear. " +
+      "Not just a bot: a very old argument about how to be heard \u2014 and keep the conversation civilized.",
     placeholder:
-      "Type the message you actually want to send. The angrier the draft, the more there is to work with.",
+      "Just write your angry message. Pick a shredding mode. Argue like an old Greek.",
     modes: {
       direct: { label: "Direct", blurb: "Say it cleanly, without the heat." },
       candid: { label: "Candid", blurb: "Say it with feeling, not flourish." },
@@ -97,24 +97,23 @@ const T = {
       { a: "Aristotle, ", n: " \u2014 ethos, pathos, logos, and kairos" },
       { a: "Plato and Socrates", n: " \u2014 the dialectic and the Socratic elenchus" },
       { a: "Seneca, ", n: ", with Epictetus on Stoic restraint" },
-      { a: 'The principle of charity, or "steelmanning"', n: " \u2014 reading the other side at its strongest" },
     ],
   },
   es: {
     tag: "Dale lo peor. Sale tu punto.",
     story1:
-      "Tu padre vuelve a votar a ese político. Tu colega solo responde los correos que le " +
-      "convienen. Tu compañero de proyecto esperó a que estuvieras de vacaciones para presentar " +
-      "el trabajo \u2014 sin ti. El vecino ha entrado en su fase de fiestas sin fin. El enfado es " +
-      "totalmente razonable.",
+      "Tu padre vuelve a votar a ese político y no lo entiendes. Tu colega solo responde los " +
+      "correos que le convienen. Tu compañero de proyecto esperó a que estuvieras de vacaciones " +
+      "para presentar el trabajo \u2014 sin ti. El vecino te bloquea el aparcamiento. Otra vez. " +
+      "El enfado es totalmente razonable. La perorata, no.",
     story2:
-      "La respuesta que redactas a las 2 de la madrugada, no. Hate Shredder pasa tu peor borrador " +
-      "por unos cuantos miles de años de gente aprendiendo a discrepar sin empeorar las cosas \u2014 " +
-      "Aristóteles, Séneca, Sócrates y mentes modernas como Carnegie, Rosenberg y Haidt \u2014 y te " +
-      "devuelve algo que quizá sí escuchen. No es solo un bot: es una discusión muy antigua sobre " +
-      "cómo hacerse oír.",
+      "Rant Shredder pasa tu peor borrador por unos cuantos miles de años de gente aprendiendo " +
+      "a discrepar sin empeorar las cosas \u2014 Aristóteles, Séneca, Sócrates y mentes modernas " +
+      "como Carnegie, Rosenberg y Haidt \u2014 y te devuelve algo que quizá sí escuchen. No es " +
+      "solo un bot: es una discusión muy antigua sobre cómo hacerse oír \u2014 y mantener la " +
+      "conversación civilizada.",
     placeholder:
-      "Escribe el mensaje que de verdad quieres enviar. Cuanto más enfadado el borrador, más hay con lo que trabajar.",
+      "Escribe tu mensaje enfadado. Elige un modo. Discute como un griego antiguo.",
     modes: {
       direct: { label: "Directo", blurb: "Dilo claro, sin la rabia." },
       candid: { label: "Sincero", blurb: "Dilo con emoción, sin drama." },
@@ -132,24 +131,23 @@ const T = {
       { a: "Aristóteles, ", n: " \u2014 ethos, pathos, logos y kairós" },
       { a: "Platón y Sócrates", n: " \u2014 la dialéctica y el elenchus socrático" },
       { a: "Séneca, ", n: ", con Epicteto sobre la mesura estoica" },
-      { a: 'El principio de caridad, o "steelmanning"', n: " \u2014 leer a la otra parte en su versión más fuerte" },
     ],
   },
   de: {
     tag: "Wütend rein. Überzeugend raus.",
     story1:
-      "Dein Vater wählt schon wieder diesen Politiker. Dein Kollege beantwortet nur die Mails, die " +
-      "ihm nützen. Dein Projektpartner hat gewartet, bis du im Urlaub warst, um die Arbeit zu " +
-      "präsentieren \u2014 ohne dich. Der Nachbar ist in seiner wilden Party-Phase. Die Wut ist völlig " +
-      "berechtigt.",
+      "Dein Vater wählt schon wieder diesen Politiker \u2014 und du verstehst es einfach nicht. " +
+      "Dein Kollege beantwortet nur die Mails, die ihm nützen. Dein Projektpartner hat gewartet, " +
+      "bis du im Urlaub warst, um die Arbeit zu präsentieren \u2014 ohne dich. Der Nachbar " +
+      "blockiert deinen Parkplatz. Schon wieder. Die Wut ist völlig berechtigt. Der Ausraster nicht.",
     story2:
-      "Die Nachricht, die du um 2 Uhr nachts tippst, ist es nicht. Hate Shredder schickt deinen " +
-      "schlimmsten Entwurf durch ein paar tausend Jahre Erfahrung darin, zu streiten, ohne es " +
-      "schlimmer zu machen \u2014 Aristoteles, Seneca, Sokrates und moderne Köpfe wie Carnegie, " +
-      "Rosenberg und Haidt \u2014 und gibt dir etwas zurück, das dein Gegenüber vielleicht wirklich " +
-      "hört. Nicht nur ein Bot: ein sehr alter Streit darüber, wie man gehört wird.",
+      "Rant Shredder schickt deinen schlimmsten Entwurf durch ein paar tausend Jahre Erfahrung " +
+      "darin, zu streiten, ohne es schlimmer zu machen \u2014 Aristoteles, Seneca, Sokrates und " +
+      "moderne Köpfe wie Carnegie, Rosenberg und Haidt \u2014 und gibt dir etwas zurück, das dein " +
+      "Gegenüber vielleicht wirklich hört. Nicht nur ein Bot: ein sehr alter Streit darüber, " +
+      "wie man gehört wird \u2014 und das Gespräch zivilisiert hält.",
     placeholder:
-      "Schreib die Nachricht, die du wirklich senden willst. Je wütender der Entwurf, desto mehr gibt es zu tun.",
+      "Schreib einfach deine wütende Nachricht. Wähl einen Modus. Streite wie ein alter Grieche.",
     modes: {
       direct: { label: "Direkt", blurb: "Sag es klar, ohne die Hitze." },
       candid: { label: "Offen", blurb: "Sag es mit Gefühl, ohne Drama." },
@@ -167,7 +165,6 @@ const T = {
       { a: "Aristoteles, ", n: " \u2014 Ethos, Pathos, Logos und Kairos" },
       { a: "Platon und Sokrates", n: " \u2014 die Dialektik und der sokratische Elenchos" },
       { a: "Seneca, ", n: ", mit Epiktet über stoische Gelassenheit" },
-      { a: 'Das Prinzip des Wohlwollens, oder "Steelmanning"', n: " \u2014 die Gegenseite in ihrer stärksten Form lesen" },
     ],
   },
 };
@@ -278,7 +275,7 @@ export default function HateShredder() {
 
       <header className="hs-head">
         <img src={senecaImg} alt="Seneca" className="hs-seneca" />
-        <h1 className="hs-title">HATE SHREDDER</h1>
+        <h1 className="hs-title">Rant Shredder</h1>
         <p className="hs-tag">{t.tag}</p>
         <div className="hs-story">
           <p>{t.story1}</p>
@@ -400,10 +397,10 @@ const CSS = `
 .hs-title{
   font-family:'Karrik',ui-sans-serif,system-ui,sans-serif;
   font-weight:800; font-size:clamp(40px,9vw,64px); line-height:.95;
-  letter-spacing:-.02em; margin:0; text-transform:uppercase;
+  letter-spacing:-.02em; margin:0;
 }
 .hs-tag{ font-size:15px; color:#555; margin:10px 0 0; }
-.hs-story{ max-width:500px; margin:18px auto 0; text-align:left; }
+.hs-story{ max-width:500px; margin:32px auto 0; text-align:left; }
 .hs-story p{ font-family:"Garamond","EB Garamond",Georgia,serif; font-size:15.5px; line-height:1.65; color:#333; margin:0 0 10px; }
 .hs-story p:last-child{ margin-bottom:0; }
 
