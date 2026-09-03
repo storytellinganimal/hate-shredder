@@ -693,7 +693,7 @@ const CSS = `
 
 .hs-row-label{
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px;
-  letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:6px;
+  letter-spacing:.1em; text-transform:uppercase; color:#000; margin-bottom:6px;
 }
 .hs-modes{ display:flex; gap:10px; }
 .hs-registers{ margin-bottom:10px; }
