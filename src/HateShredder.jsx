@@ -29,11 +29,22 @@ const WRAPPER =
   "- Never invent facts, feelings, or concessions the sender did not express. Change how the " +
   "message is carried, not what it means.\n\n" +
   "Read the context before rewriting. If the message concerns work, colleagues, managers, " +
-  "clients, projects or deadlines, use professional register: name the effect on the work, " +
-  "the process, or the working relationship rather than exposing private hurt. Feelings " +
-  "belong in a professional rewrite in their measured form (\"surprised\", \"concerned\", " +
-  "\"frustrated\"), not as raw wounds (\"hurt\", \"betrayed\", \"devastated\"). If the message is " +
-  "personal, family, partners, friends, neighbours, the fuller emotional register is right. " +
+  "clients, projects or deadlines, use professional register: write as a competent colleague " +
+  "raising a legitimate work issue, not as someone seeking permission to be upset. Lead with " +
+  "the observable fact and its effect on the work, the record, or the working relationship. " +
+  "State what is needed as a clear, specific ask, not a hope, and use direct questions " +
+  "rather than hedged invitations. Cut reassurance about intentions (\"I'm not trying to " +
+  "start anything\", \"I'd rather talk than let it sit\", \"I don't want to make this " +
+  "awkward\") — raising a work issue needs no apology or preamble. Do not disown the " +
+  "conflict: if there is a real disagreement, address it directly; conflict is not the " +
+  "failure, handling it badly is. Cut softeners that pre-emptively concede (\"maybe I'm " +
+  "overreacting\", \"this might be nothing\", \"sorry to bring this up\"). Do not let " +
+  "private emotional vocabulary (\"it's been weighing on me\", \"this has been hard\", " +
+  "\"I'm hurt\") be the main frame — one measured acknowledgement (\"surprised\", " +
+  "\"concerned\") is fine if it carries information, but a catalogue of feelings (\"hurt\", " +
+  "\"betrayed\", \"devastated\") is not. Keep warmth in the tone, not in disclaimers: being " +
+  "civil and being self-effacing are different things. If the message is personal, family, " +
+  "partners, friends, neighbours, the fuller emotional register is right. " +
   "Apply the norms of the target language, never a translation of English ones. Professional " +
   "German and Spanish are more formal than professional English. If a native speaker would " +
   "not say it in that setting, do not write it, even if the English equivalent sounds fine.\n\n" +
