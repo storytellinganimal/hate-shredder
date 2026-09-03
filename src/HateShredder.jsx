@@ -68,17 +68,13 @@ const TAIL =
   "{\n" +
   '  "rewrite": string — the rewritten message, exactly as the sender would send it, with no ' +
   "quotation marks or preamble,\n" +
-  '  "diagnosis": string, one or two sentences — what made the original message likely to be ' +
-  "ignored or to escalate things, and what this rewrite does differently,\n" +
-  '  "moves": an array of 2 or 3 objects, each { "principle": string naming the specific idea ' +
-  "drawn on (Nonviolent Communication, Carnegie, Haidt, Aristotle's rhetoric, Socratic dialectic, " +
-  'or Stoic restraint), "change": string naming the concrete change this specific message needed }, ' +
-  "tied to what actually changed in this message, not generic advice,\n" +
-  '  "questions": an array of 2 or 3 strings — questions worth sitting with before sending, ' +
-  "specific to this message and this sender's situation\n" +
+  '  "rationale": string, two to three sentences at most — what made the original message ' +
+  "likely to be ignored or to escalate things, and what this rewrite does differently. Tie it " +
+  "to what actually changed in this specific message, not generic advice.\n" +
   "}\n" +
   "Write every field in the target language, matching the register instructions above; " +
-  "never leave a field in English unless the target language is English.\n\n" +
+  'never leave a field in English unless the target language is English. Keep "rationale" to ' +
+  "two or three sentences — do not exceed that, no matter how much there is to say.\n\n" +
   "Message:\n";
 
 // Italic work titles, shared across languages ("" = no italic title)
@@ -115,10 +111,7 @@ const T = {
     outSuffix: "what you could say instead",
     startOver: "Start over",
     error: "It jammed before it finished. Check your connection and run it again.",
-    toolkitLabel: "Why this works",
-    diagnosisHeading: "Diagnosis",
-    movesHeading: "What changed",
-    questionsHeading: "Questions to sit with",
+    rationaleLabel: "Why it works",
     builtOn: "Built on",
     sources: [
       { a: "Marshall B. Rosenberg, ", n: "" },
@@ -153,10 +146,7 @@ const T = {
     outSuffix: "lo que podrías decir en su lugar",
     startOver: "Empezar de nuevo",
     error: "Se atascó antes de terminar. Revisa tu conexión y vuelve a intentarlo.",
-    toolkitLabel: "Por qué funciona",
-    diagnosisHeading: "Diagnóstico",
-    movesHeading: "Qué cambió",
-    questionsHeading: "Preguntas para reflexionar",
+    rationaleLabel: "Por qué funciona",
     builtOn: "Basado en",
     sources: [
       { a: "Marshall B. Rosenberg, ", n: "" },
@@ -191,10 +181,7 @@ const T = {
     outSuffix: "was du stattdessen sagen könntest",
     startOver: "Von vorn beginnen",
     error: "Es hat sich verklemmt, bevor es fertig war. Prüfe deine Verbindung und versuch es erneut.",
-    toolkitLabel: "Warum das funktioniert",
-    diagnosisHeading: "Diagnose",
-    movesHeading: "Was sich geändert hat",
-    questionsHeading: "Fragen zum Nachdenken",
+    rationaleLabel: "Warum es wirkt",
     builtOn: "Basierend auf",
     sources: [
       { a: "Marshall B. Rosenberg, ", n: "" },
@@ -246,20 +233,10 @@ function parseShredResponse(raw) {
     }
     return {
       rewrite: parsed.rewrite.trim(),
-      toolkit: {
-        diagnosis: typeof parsed.diagnosis === "string" ? parsed.diagnosis.trim() : "",
-        moves: Array.isArray(parsed.moves)
-          ? parsed.moves
-              .filter((m) => m && typeof m.principle === "string" && typeof m.change === "string")
-              .map((m) => ({ principle: m.principle.trim(), change: m.change.trim() }))
-          : [],
-        questions: Array.isArray(parsed.questions)
-          ? parsed.questions.filter((q) => typeof q === "string" && q.trim()).map((q) => q.trim())
-          : [],
-      },
+      rationale: typeof parsed.rationale === "string" ? parsed.rationale.trim() : "",
     };
   } catch {
-    return { rewrite: raw.trim(), toolkit: null };
+    return { rewrite: raw.trim(), rationale: "" };
   }
 }
 
@@ -269,7 +246,7 @@ export default function HateShredder() {
   const [frozen, setFrozen] = useState("");
   const [phase, setPhase] = useState("idle"); // idle | shredding | done | error
   const [output, setOutput] = useState("");
-  const [toolkit, setToolkit] = useState(null);
+  const [rationale, setRationale] = useState("");
   const [modeId, setModeId] = useState("direct");
   const [copied, setCopied] = useState(false);
 
@@ -298,16 +275,16 @@ export default function HateShredder() {
     setModeId(id);
     setFrozen(source);
     setOutput("");
-    setToolkit(null);
+    setRationale("");
     setPhase("shredding");
     try {
       const [raw] = await Promise.all([
         fetchRewrite(source, INSTRUCTIONS[id], langName),
         wait(prefersReduced ? REVEAL_MS_REDUCED : REVEAL_MS),
       ]);
-      const { rewrite, toolkit: parsedToolkit } = parseShredResponse(raw);
+      const { rewrite, rationale: parsedRationale } = parseShredResponse(raw);
       setOutput(rewrite);
-      setToolkit(parsedToolkit);
+      setRationale(parsedRationale);
       setPhase("done");
     } catch (e) {
       setPhase("error");
@@ -317,7 +294,7 @@ export default function HateShredder() {
   function startOver() {
     setPhase("idle");
     setOutput("");
-    setToolkit(null);
+    setRationale("");
     setText("");
     setCopied(false);
   }
@@ -438,47 +415,16 @@ export default function HateShredder() {
             {copied ? "✓" : "Copy"}
           </button>
           <div className="hs-out-text">{output}</div>
+          {rationale && (
+            <div className="hs-rationale">
+              <div className="hs-rationale-label">{t.rationaleLabel}</div>
+              <p className="hs-rationale-text">{rationale}</p>
+            </div>
+          )}
           <button className="hs-startover" onClick={startOver}>
             {t.startOver}
           </button>
         </div>
-      )}
-
-      {phase === "done" && toolkit && (
-        <details className="hs-toolkit">
-          <summary className="hs-toolkit-summary">{t.toolkitLabel}</summary>
-          <div className="hs-toolkit-body">
-            {toolkit.diagnosis && (
-              <div className="hs-toolkit-section">
-                <div className="hs-toolkit-heading">{t.diagnosisHeading}</div>
-                <p className="hs-toolkit-diagnosis">{toolkit.diagnosis}</p>
-              </div>
-            )}
-            {toolkit.moves.length > 0 && (
-              <div className="hs-toolkit-section">
-                <div className="hs-toolkit-heading">{t.movesHeading}</div>
-                <ul className="hs-toolkit-moves">
-                  {toolkit.moves.map((m, i) => (
-                    <li key={i}>
-                      <span className="hs-toolkit-principle">{m.principle}</span>
-                      <span className="hs-toolkit-change">{m.change}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {toolkit.questions.length > 0 && (
-              <div className="hs-toolkit-section">
-                <div className="hs-toolkit-heading">{t.questionsHeading}</div>
-                <ul className="hs-toolkit-questions">
-                  {toolkit.questions.map((q, i) => (
-                    <li key={i}>{q}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </details>
       )}
 
       {phase === "error" && <div className="hs-error">{t.error}</div>}
@@ -636,34 +582,12 @@ const CSS = `
 }
 .hs-startover:focus-visible{ outline:2px solid #000; outline-offset:2px; }
 
-.hs-toolkit{
-  width:min(500px,92%); margin-top:14px; border:1px solid #000; padding:0;
+.hs-rationale{ margin-top:20px; padding-top:16px; border-top:1px solid #000; }
+.hs-rationale-label{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:6px;
 }
-.hs-toolkit-summary{
-  cursor:pointer; list-style:none; padding:14px 20px;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;
-  letter-spacing:.1em; text-transform:uppercase; color:#000;
-}
-.hs-toolkit-summary::-webkit-details-marker{ display:none; }
-.hs-toolkit-summary::before{ content:"+ "; }
-.hs-toolkit[open] .hs-toolkit-summary::before{ content:"− "; }
-.hs-toolkit-summary:focus-visible{ outline:2px solid #000; outline-offset:-2px; }
-.hs-toolkit-body{ padding:0 22px 20px; border-top:1px solid #000; }
-.hs-toolkit-section{ margin-top:18px; }
-.hs-toolkit-heading{
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;
-  letter-spacing:.08em; text-transform:uppercase; color:#000; margin-bottom:8px;
-}
-.hs-toolkit-diagnosis{ font-size:14.5px; line-height:1.55; color:#333; margin:0; }
-.hs-toolkit-moves{ list-style:none; margin:0; padding:0; }
-.hs-toolkit-moves li{
-  padding:8px 0; border-top:1px solid #000; display:flex; flex-direction:column; gap:2px;
-}
-.hs-toolkit-moves li:first-child{ border-top:none; }
-.hs-toolkit-principle{ font-weight:700; font-size:13px; }
-.hs-toolkit-change{ font-size:13.5px; line-height:1.5; color:#333; }
-.hs-toolkit-questions{ margin:0; padding-left:18px; }
-.hs-toolkit-questions li{ font-size:13.5px; line-height:1.55; color:#333; padding:3px 0; }
+.hs-rationale-text{ font-size:13.5px; line-height:1.55; color:#666; font-weight:400; margin:0; }
 
 .hs-error{
   width:min(500px,92%); margin-top:22px; font-size:14px; color:#000;
