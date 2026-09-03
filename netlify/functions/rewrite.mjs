@@ -23,6 +23,7 @@ export const handler = async (event) => {
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
       max_tokens: 1600,
+      temperature: 0.3,
       messages: [{ role: "user", content: prompt }],
     }),
   });

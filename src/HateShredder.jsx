@@ -127,6 +127,22 @@ const REGISTER_COMMON =
   "stays vulnerable but not needy, self-assured. In professional register, vulnerable means " +
   "naming real stakes plainly, not exposing private hurt.";
 
+const SELF_CHECK =
+  "\n\nBefore returning, re-read your rewrite and check it against these rules. If it " +
+  "breaks any of them, rewrite it before responding:\n" +
+  "- It must NOT contain any reassurance about the other person's feelings or any apology " +
+  "for raising the issue. Phrases like \"I'm not trying to make you feel bad\", \"I'm not " +
+  "trying to make you feel like a bad friend\", \"I don't think you're doing this " +
+  "carelessly\", \"even if that's not how you meant it\", \"no pressure\", \"I hope this " +
+  "doesn't come across wrong\" are all forbidden. Remove them entirely, do not replace " +
+  "them with a gentler version.\n" +
+  "- It must END on a concrete, answerable question or a specific requested action. Not a " +
+  "vague invitation to talk.\n" +
+  "- It must state feeling plainly and ONCE, without pleading, longing, or repeated " +
+  "reassurance.\n" +
+  "Put only the corrected rewrite in the JSON's \"rewrite\" field below — no commentary " +
+  "about the correction.";
+
 const TAIL =
   "\n\nReply with a single JSON object and nothing else — no preamble, no markdown code " +
   "fences, no commentary before or after it. Its shape:\n" +
@@ -326,7 +342,7 @@ async function fetchRewrite(text, instruction, registerText, langName) {
   const langLine =
     "\n\nWrite the rewritten message in " + langName +
     ", regardless of the language of these instructions.";
-  const prompt = WRAPPER + instruction + registerText + langLine + TAIL + text;
+  const prompt = WRAPPER + instruction + registerText + SELF_CHECK + langLine + TAIL + text;
   const response = await fetch("/api/rewrite", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
