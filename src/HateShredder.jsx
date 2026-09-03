@@ -26,6 +26,16 @@ const WRAPPER =
   "had, and what is actually wanted.\n" +
   "- Drop contempt, blame, and sarcasm, but keep the spine. Removing hostility is not removing " +
   "firmness; the rewrite must still ask for what the original asked for.\n" +
+  "- Structure the message in three movements where the situation allows. First YOU: " +
+  "genuinely seek the other person's account of what happened before asserting your own " +
+  "— go into their half of the field. Second I: then state your own view, the facts as you " +
+  "saw them, and the effect on you, as impact rather than accusation. Third WE: close on " +
+  "the shared problem and how you move forward together. Understanding the other side " +
+  "first is not a courtesy, it is what makes the rest land.\n" +
+  "- Never end on a vague request to talk (\"can we talk through this\", \"let me know " +
+  "your thoughts\", \"I'd love to chat\"). End on something the other person can act on: " +
+  "a specific proposal, a concrete next step, or a direct question that moves things " +
+  "forward. The reader should know exactly what they are being asked to do or decide.\n" +
   "- Never invent facts, feelings, or concessions the sender did not express. Change how the " +
   "message is carried, not what it means.\n\n" +
   "Read the context before rewriting. If the message concerns work, colleagues, managers, " +
@@ -43,8 +53,10 @@ const WRAPPER =
   "\"I'm hurt\") be the main frame — one measured acknowledgement (\"surprised\", " +
   "\"concerned\") is fine if it carries information, but a catalogue of feelings (\"hurt\", " +
   "\"betrayed\", \"devastated\") is not. Keep warmth in the tone, not in disclaimers: being " +
-  "civil and being self-effacing are different things. If the message is personal, family, " +
-  "partners, friends, neighbours, the fuller emotional register is right. " +
+  "civil and being self-effacing are different things. Keep the WE step and the closing " +
+  "ask framed around the work and the concrete next step, not the relationship itself. " +
+  "If the message is personal, family, partners, friends, neighbours, the fuller emotional " +
+  "register is right. " +
   "Apply the norms of the target language, never a translation of English ones. Professional " +
   "German and Spanish are more formal than professional English. If a native speaker would " +
   "not say it in that setting, do not write it, even if the English equivalent sounds fine.\n\n" +
