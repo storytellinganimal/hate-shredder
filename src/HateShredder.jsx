@@ -38,25 +38,6 @@ const WRAPPER =
   "forward. The reader should know exactly what they are being asked to do or decide.\n" +
   "- Never invent facts, feelings, or concessions the sender did not express. Change how the " +
   "message is carried, not what it means.\n\n" +
-  "Read the context before rewriting. If the message concerns work, colleagues, managers, " +
-  "clients, projects or deadlines, use professional register: write as a competent colleague " +
-  "raising a legitimate work issue, not as someone seeking permission to be upset. Lead with " +
-  "the observable fact and its effect on the work, the record, or the working relationship. " +
-  "State what is needed as a clear, specific ask, not a hope, and use direct questions " +
-  "rather than hedged invitations. Cut reassurance about intentions (\"I'm not trying to " +
-  "start anything\", \"I'd rather talk than let it sit\", \"I don't want to make this " +
-  "awkward\") — raising a work issue needs no apology or preamble. Do not disown the " +
-  "conflict: if there is a real disagreement, address it directly; conflict is not the " +
-  "failure, handling it badly is. Cut softeners that pre-emptively concede (\"maybe I'm " +
-  "overreacting\", \"this might be nothing\", \"sorry to bring this up\"). Do not let " +
-  "private emotional vocabulary (\"it's been weighing on me\", \"this has been hard\", " +
-  "\"I'm hurt\") be the main frame — one measured acknowledgement (\"surprised\", " +
-  "\"concerned\") is fine if it carries information, but a catalogue of feelings (\"hurt\", " +
-  "\"betrayed\", \"devastated\") is not. Keep warmth in the tone, not in disclaimers: being " +
-  "civil and being self-effacing are different things. Keep the WE step and the closing " +
-  "ask framed around the work and the concrete next step, not the relationship itself. " +
-  "If the message is personal, family, partners, friends, neighbours, the fuller emotional " +
-  "register is right. " +
   "Apply the norms of the target language, never a translation of English ones. Professional " +
   "German and Spanish are more formal than professional English. If a native speaker would " +
   "not say it in that setting, do not write it, even if the English equivalent sounds fine.\n\n" +
@@ -84,6 +65,37 @@ const INSTRUCTIONS = {
 };
 
 const MODE_ORDER = ["direct", "candid", "dialectic"];
+
+const REGISTER_ORDER = ["personal", "professional"];
+
+const REGISTER_INSTRUCTIONS = {
+  personal:
+    "\n\nRegister: personal. This is a friend, partner, or family member. Use first names or " +
+    "no name at all. Warmth and contractions are welcome. Direct emotional language is fine " +
+    "— \"this hurt\", \"I've missed you\", \"I felt dropped\" — and the relationship itself " +
+    "can be named and discussed directly.",
+  professional:
+    "\n\nRegister: professional. Write as a competent colleague raising a legitimate work " +
+    "issue, not as someone asking permission to be upset. Cut all reassurance about your own " +
+    "intentions (\"I'm not trying to start anything\", \"I'd rather talk than let it sit\", " +
+    "\"let's not turn this into a fight\") — raising a work issue needs no apology or " +
+    "preamble. Cut disowning of conflict: if there is a real disagreement, address it " +
+    "directly; conflict is not the failure, handling it badly is. Cut pre-emptive softeners " +
+    "and apologies (\"sorry to bring this up\", \"maybe I'm overreacting\", \"this might be " +
+    "nothing\"). Do not use private emotional vocabulary (\"hurt\", \"weighing on me\") as " +
+    "the main frame — one measured acknowledgement (\"I was surprised\", \"I was " +
+    "concerned\") is fine if it carries information, a catalogue of feelings is not. Lead " +
+    "with the observable fact and its effect on the work, the record, or the working " +
+    "relationship. Frame the WE step and the closing ask around the work and a concrete " +
+    "next step, never around the relationship or \"finding time to talk\" as an end in " +
+    "itself — end on a specific proposal or decision. Keep warmth in the tone, not in the " +
+    "disclaimers: civil and self-effacing are different things.",
+};
+
+const REGISTER_COMMON =
+  "\n\nWhichever mode is in play, keep its character in this register: a Candid rewrite " +
+  "stays vulnerable but not needy, self-assured. In professional register, vulnerable means " +
+  "naming real stakes plainly, not exposing private hurt.";
 
 const TAIL =
   "\n\nReply with a single JSON object and nothing else — no preamble, no markdown code " +
@@ -139,6 +151,10 @@ const T = {
       candid: { label: "Candid", blurb: "Say it with feeling, not flourish." },
       dialectic: { label: "Dialectic", blurb: "Turn it into a real conversation." },
     },
+    registers: {
+      personal: { label: "Personal" },
+      professional: { label: "Professional" },
+    },
     st: { ready: "READY", processing: "PROCESSING", done: "DONE", jammed: "JAMMED" },
     outSuffix: "what you could say instead",
     startOver: "Start over",
@@ -175,6 +191,10 @@ const T = {
       direct: { label: "Directo", blurb: "Dilo claro, sin la rabia." },
       candid: { label: "Sincero", blurb: "Dilo con emoción, sin drama." },
       dialectic: { label: "Dialéctico", blurb: "Conviértelo en una conversación." },
+    },
+    registers: {
+      personal: { label: "Personal" },
+      professional: { label: "Profesional" },
     },
     st: { ready: "LISTO", processing: "PROCESANDO", done: "HECHO", jammed: "ATASCADO" },
     outSuffix: "lo que podrías decir en su lugar",
@@ -213,6 +233,10 @@ const T = {
       candid: { label: "Offen", blurb: "Sag es mit Gefühl, ohne Drama." },
       dialectic: { label: "Dialektisch", blurb: "Mach ein echtes Gespräch daraus." },
     },
+    registers: {
+      personal: { label: "Privat" },
+      professional: { label: "Beruflich" },
+    },
     st: { ready: "BEREIT", processing: "VERARBEITUNG", done: "FERTIG", jammed: "VERKLEMMT" },
     outSuffix: "was du stattdessen sagen könntest",
     startOver: "Von vorn beginnen",
@@ -236,11 +260,11 @@ function wait(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function fetchRewrite(text, instruction, langName) {
+async function fetchRewrite(text, instruction, registerText, langName) {
   const langLine =
     "\n\nWrite the rewritten message in " + langName +
     ", regardless of the language of these instructions.";
-  const prompt = WRAPPER + instruction + langLine + TAIL + text;
+  const prompt = WRAPPER + instruction + registerText + langLine + TAIL + text;
   const response = await fetch("/api/rewrite", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -305,6 +329,7 @@ export default function HateShredder() {
   const [phase, setPhase] = useState("idle"); // idle | shredding | done | error
   const [output, setOutput] = useState("");
   const [toolkit, setToolkit] = useState(null);
+  const [register, setRegister] = useState("personal");
   const [modeId, setModeId] = useState("direct");
   const [copied, setCopied] = useState(false);
 
@@ -337,7 +362,12 @@ export default function HateShredder() {
     setPhase("shredding");
     try {
       const [raw] = await Promise.all([
-        fetchRewrite(source, INSTRUCTIONS[id], langName),
+        fetchRewrite(
+          source,
+          INSTRUCTIONS[id],
+          REGISTER_INSTRUCTIONS[register] + REGISTER_COMMON,
+          langName
+        ),
         wait(prefersReduced ? REVEAL_MS_REDUCED : REVEAL_MS),
       ]);
       const { rewrite, toolkit: parsedToolkit } = parseShredResponse(raw);
@@ -449,6 +479,18 @@ export default function HateShredder() {
           )}
 
           <div className="hs-body">
+            <div className="hs-modes hs-registers">
+              {REGISTER_ORDER.map((id) => (
+                <button
+                  key={id}
+                  className={"hs-mode" + (register === id ? " hs-mode--on" : "")}
+                  onClick={() => setRegister(id)}
+                  aria-pressed={register === id}
+                >
+                  <span className="hs-mode-label">{t.registers[id].label}</span>
+                </button>
+              ))}
+            </div>
             <div className="hs-modes">
               {MODE_ORDER.map((id) => (
                 <button
@@ -616,6 +658,7 @@ const CSS = `
 .hs-body{ border:1px solid #000; border-top:none; padding:20px; background:#C2E8FF; }
 
 .hs-modes{ display:flex; gap:10px; }
+.hs-registers{ margin-bottom:10px; }
 .hs-mode{
   flex:1 1 0; text-align:left; cursor:pointer; background:#fff; color:#000;
   border:1px solid #000; padding:12px 12px; display:flex; flex-direction:column; gap:4px;
