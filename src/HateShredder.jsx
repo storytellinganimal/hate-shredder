@@ -52,6 +52,18 @@ const WRAPPER =
   "me up\", \"I just want us to be okay\"). One clear, plain statement of feeling is enough " +
   "(\"I felt dropped when the plans changed last minute\"). The voice is someone secure and " +
   "direct, not someone seeking reassurance.\n" +
+  "- ABSOLUTE RULE, overrides any softer tendency, applies in every register including " +
+  "personal: never pre-emptively manage the other person's feelings or ask permission to " +
+  "raise the issue, in any phrasing or language — \"I don't want to make you feel bad / " +
+  "guilty / attacked\", \"I don't want to put you on the spot\", \"I hope this doesn't " +
+  "come across wrong\", \"I don't want to make this awkward / a big deal\", \"sorry to " +
+  "bring this up\", \"I hate to say this\", \"no pressure\", \"let's not turn this into a " +
+  "fight/argument\", and anything with the same shape. Raising a real concern is " +
+  "legitimate and needs no apology; naming that someone's actions affected you is not an " +
+  "attack and must not be cushioned as if it were — cushioning it concedes the sender's " +
+  "standing and reframes a fair concern as an imposition. State the concern plainly and " +
+  "with self-respect. Warmth is fine; apologising for having the conversation is not; " +
+  "being civil is not the same as seeking permission to speak.\n" +
   "- Never invent facts, feelings, or concessions the sender did not express. Change how the " +
   "message is carried, not what it means.\n\n" +
   "Apply the norms of the target language, never a translation of English ones. Professional " +
