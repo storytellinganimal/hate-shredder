@@ -32,10 +32,26 @@ const WRAPPER =
   "saw them, and the effect on you, as impact rather than accusation. Third WE: close on " +
   "the shared problem and how you move forward together. Understanding the other side " +
   "first is not a courtesy, it is what makes the rest land.\n" +
-  "- Never end on a vague request to talk (\"can we talk through this\", \"let me know " +
-  "your thoughts\", \"I'd love to chat\"). End on something the other person can act on: " +
-  "a specific proposal, a concrete next step, or a direct question that moves things " +
-  "forward. The reader should know exactly what they are being asked to do or decide.\n" +
+  "- ABSOLUTE RULE, overrides any softer tendency: never end a message with a vague " +
+  "invitation to talk, in any phrasing or language — \"can we talk\", \"can we find time " +
+  "to talk\", \"could we sit down\", \"I'd love to talk/sit down together\", \"let's make " +
+  "time for this\", \"can we talk this weekend\", \"not to change each other's minds, but " +
+  "to understand each other\", \"I don't want this to sit between us\", and anything with " +
+  "the same shape. End every message on a concrete, actionable request instead: a specific " +
+  "question the other person can answer, or a specific action or decision they can respond " +
+  "to. The reader must know exactly what they are being asked to do or decide. Good " +
+  "endings look like \"What made you decide to go ahead without me on the presentation?\", " +
+  "\"Can you send me the updated figures by Thursday?\", \"Which of these two dates works " +
+  "for you?\", \"What would need to change for you to commit to a plan we both keep?\". If " +
+  "the real next step is a conversation, still make the ask specific and answerable — " +
+  "\"What's driving the change in your thinking on this?\" rather than \"can we talk about " +
+  "it\".\n" +
+  "- ABSOLUTE RULE, overrides any softer tendency, applies in every register including " +
+  "personal: cut emotional pleading and neediness. Never write repeated statements of hurt " +
+  "or longing (\"I don't want to lose you\", \"I've missed you so much\", \"this is eating " +
+  "me up\", \"I just want us to be okay\"). One clear, plain statement of feeling is enough " +
+  "(\"I felt dropped when the plans changed last minute\"). The voice is someone secure and " +
+  "direct, not someone seeking reassurance.\n" +
   "- Never invent facts, feelings, or concessions the sender did not express. Change how the " +
   "message is carried, not what it means.\n\n" +
   "Apply the norms of the target language, never a translation of English ones. Professional " +
@@ -71,9 +87,11 @@ const REGISTER_ORDER = ["personal", "professional"];
 const REGISTER_INSTRUCTIONS = {
   personal:
     "\n\nRegister: personal. This is a friend, partner, or family member. Use first names or " +
-    "no name at all. Warmth and contractions are welcome. Direct emotional language is fine " +
-    "— \"this hurt\", \"I've missed you\", \"I felt dropped\" — and the relationship itself " +
-    "can be named and discussed directly.",
+    "no name at all. Warmth and contractions are welcome, and the relationship itself can be " +
+    "named and discussed directly. One plain, direct statement of feeling is fine — \"this " +
+    "hurt\", \"I felt dropped when the plans changed last minute\" — but personal does not " +
+    "mean pleading: no over-explaining, no repeated statements of hurt or longing. Warmth " +
+    "and plain emotion, not neediness.",
   professional:
     "\n\nRegister: professional. Write as a competent colleague raising a legitimate work " +
     "issue, not as someone asking permission to be upset. Cut all reassurance about your own " +
