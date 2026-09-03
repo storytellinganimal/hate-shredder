@@ -129,6 +129,8 @@ const SOURCE_TITLES = [
   "Rhetoric",
   "",
   "On Anger (De Ira)",
+  "Getting to Yes",
+  "Difficult Conversations",
 ];
 
 const T = {
@@ -155,6 +157,8 @@ const T = {
       personal: { label: "Personal" },
       professional: { label: "Professional" },
     },
+    situationLabel: "Choose the situation",
+    styleLabel: "Choose the style",
     st: { ready: "READY", processing: "PROCESSING", done: "DONE", jammed: "JAMMED" },
     outSuffix: "what you could say instead",
     startOver: "Start over",
@@ -170,6 +174,14 @@ const T = {
       { a: "Aristotle, ", n: " \u2014 ethos, pathos, logos, and kairos" },
       { a: "Plato and Socrates", n: " \u2014 the dialectic and the Socratic elenchus" },
       { a: "Seneca, ", n: ", with Epictetus on Stoic restraint" },
+      {
+        a: "Roger Fisher and William Ury, ",
+        n: " (Harvard Negotiation Project) \u2014 interests over positions, separating people from the problem",
+      },
+      {
+        a: "Douglas Stone, Bruce Patton and Sheila Heen, ",
+        n: " \u2014 contribution rather than blame, disentangling impact from intent",
+      },
     ],
   },
   es: {
@@ -196,6 +208,8 @@ const T = {
       personal: { label: "Personal" },
       professional: { label: "Profesional" },
     },
+    situationLabel: "Elige la situación",
+    styleLabel: "Elige el estilo",
     st: { ready: "LISTO", processing: "PROCESANDO", done: "HECHO", jammed: "ATASCADO" },
     outSuffix: "lo que podrías decir en su lugar",
     startOver: "Empezar de nuevo",
@@ -211,6 +225,14 @@ const T = {
       { a: "Aristóteles, ", n: " \u2014 ethos, pathos, logos y kairós" },
       { a: "Platón y Sócrates", n: " \u2014 la dialéctica y el elenchus socrático" },
       { a: "Séneca, ", n: ", con Epicteto sobre la mesura estoica" },
+      {
+        a: "Roger Fisher y William Ury, ",
+        n: " (Harvard Negotiation Project) — intereses por encima de posiciones, separar a las personas del problema",
+      },
+      {
+        a: "Douglas Stone, Bruce Patton y Sheila Heen, ",
+        n: " — contribución en lugar de culpa, separar el impacto de la intención",
+      },
     ],
   },
   de: {
@@ -237,6 +259,8 @@ const T = {
       personal: { label: "Privat" },
       professional: { label: "Beruflich" },
     },
+    situationLabel: "Wähle die Situation",
+    styleLabel: "Wähle den Stil",
     st: { ready: "BEREIT", processing: "VERARBEITUNG", done: "FERTIG", jammed: "VERKLEMMT" },
     outSuffix: "was du stattdessen sagen könntest",
     startOver: "Von vorn beginnen",
@@ -252,6 +276,14 @@ const T = {
       { a: "Aristoteles, ", n: " \u2014 Ethos, Pathos, Logos und Kairos" },
       { a: "Platon und Sokrates", n: " \u2014 die Dialektik und der sokratische Elenchos" },
       { a: "Seneca, ", n: ", mit Epiktet über stoische Gelassenheit" },
+      {
+        a: "Roger Fisher und William Ury, ",
+        n: " (Harvard Negotiation Project) — Interessen statt Positionen, die Menschen vom Problem trennen",
+      },
+      {
+        a: "Douglas Stone, Bruce Patton und Sheila Heen, ",
+        n: " — Beitrag statt Schuldzuweisung, Wirkung von Absicht trennen",
+      },
     ],
   },
 };
@@ -479,6 +511,7 @@ export default function HateShredder() {
           )}
 
           <div className="hs-body">
+            <div className="hs-row-label">{t.situationLabel}</div>
             <div className="hs-modes hs-registers">
               {REGISTER_ORDER.map((id) => (
                 <button
@@ -491,6 +524,7 @@ export default function HateShredder() {
                 </button>
               ))}
             </div>
+            <div className="hs-row-label">{t.styleLabel}</div>
             <div className="hs-modes">
               {MODE_ORDER.map((id) => (
                 <button
@@ -657,6 +691,10 @@ const CSS = `
 
 .hs-body{ border:1px solid #000; border-top:none; padding:20px; background:#C2E8FF; }
 
+.hs-row-label{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:6px;
+}
 .hs-modes{ display:flex; gap:10px; }
 .hs-registers{ margin-bottom:10px; }
 .hs-mode{
