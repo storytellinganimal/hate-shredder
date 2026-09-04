@@ -361,13 +361,33 @@ async function fetchRewrite(text, instruction, registerText, langName) {
 
 function stripCodeFences(raw) {
   const trimmed = raw.trim();
-  const fenced = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
-  return fenced ? fenced[1].trim() : trimmed;
+  // Look for a fenced block anywhere in the text, not just one that wraps the
+  // whole string — the model may add a stray sentence before or after it.
+  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  if (fenced) return fenced[1].trim();
+  // No matched opening+closing pair — strip a lone stray fence marker at
+  // either end, in case the closing (or opening) backticks are missing.
+  return trimmed
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "")
+    .trim();
+}
+
+function extractRewriteField(text) {
+  const match = text.match(/"rewrite"\s*:\s*"((?:\\.|[^"\\])*)"/);
+  if (!match) return null;
+  try {
+    // Round-trip through JSON.parse to correctly unescape the captured string.
+    return JSON.parse('"' + match[1] + '"');
+  } catch {
+    return null;
+  }
 }
 
 function parseShredResponse(raw) {
+  const cleaned = stripCodeFences(raw);
   try {
-    const parsed = JSON.parse(stripCodeFences(raw));
+    const parsed = JSON.parse(cleaned);
     if (!parsed || typeof parsed.rewrite !== "string" || !parsed.rewrite.trim()) {
       throw new Error("missing rewrite");
     }
@@ -396,7 +416,10 @@ function parseShredResponse(raw) {
       },
     };
   } catch {
-    return { rewrite: raw.trim(), toolkit: null };
+    // Parsing failed even after cleanup — try to salvage just the "rewrite"
+    // field with a regex before falling back to dumping the raw response.
+    const extracted = extractRewriteField(cleaned) || extractRewriteField(raw);
+    return { rewrite: extracted ? extracted.trim() : raw.trim(), toolkit: null };
   }
 }
 
